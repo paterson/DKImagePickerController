@@ -118,7 +118,7 @@ protocol DKImagePickerControllerDelegate {
  */
 public class DKImagePickerController: UINavigationController {
 
-    public var delegate : DKImagePickerControllerDelegate?
+    public var pickerDelegate : DKImagePickerControllerDelegate?
     
     /// The maximum count of assets which the user will be able to select.
     public var maxSelectableCount = 999
@@ -197,7 +197,7 @@ public class DKImagePickerController: UINavigationController {
     internal func dismiss() {
         self.dismissViewControllerAnimated(true, completion: nil)
         
-        if let delegate = self.delegate {
+        if let delegate = self.pickerDelegate {
             delegate.imagePickerControllerDidCancel(self)
         }
     }
@@ -205,7 +205,7 @@ public class DKImagePickerController: UINavigationController {
     internal func done() {
         self.dismissViewControllerAnimated(true, completion: nil)
         
-        if let delegate = self.delegate {
+        if let delegate = self.pickerDelegate {
             delegate.imagePickerController(self, didCompleteWithAssets: self.selectedAssets)
         }
     }
