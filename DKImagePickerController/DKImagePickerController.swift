@@ -108,10 +108,17 @@ public struct DKImagePickerControllerSourceType : OptionSetType {
 
 // MARK: - Public DKImagePickerController
 
+protocol DKImagePickerControllerDelegate {
+    func imagePickerController(controller : DKImagePickerController, didCompleteWithAssets: [DKAsset])
+    func imagePickerControllerDidCancel(controller : DKImagePickerController)
+}
+
 /**
  * The `DKImagePickerController` class offers the all public APIs which will affect the UI.
  */
 public class DKImagePickerController: UINavigationController {
+
+    public var delegate : DKImagePickerControllerDelegate?
     
     /// The maximum count of assets which the user will be able to select.
     public var maxSelectableCount = 999
@@ -124,12 +131,6 @@ public class DKImagePickerController: UINavigationController {
     
     /// Whether allows to select photos and videos at the same time.
     public var allowMultipleTypes = true
-    
-    /// The callback block is executed when user pressed the select button.
-    public var didSelectedAssets: ((assets: [DKAsset]) -> Void)?
-    
-    /// The callback block is executed when user pressed the cancel button.
-    public var didCancelled: (() -> Void)?
     
     /// It will have selected the specific assets.
     public var defaultSelectedAssets: [DKAsset]? {
@@ -196,16 +197,16 @@ public class DKImagePickerController: UINavigationController {
     internal func dismiss() {
         self.dismissViewControllerAnimated(true, completion: nil)
         
-        if let didCancelled = self.didCancelled {
-            didCancelled()
+        if let delegate = self.delegate {
+            delegate.imagePickerControllerDidCancel(self)
         }
     }
     
     internal func done() {
         self.dismissViewControllerAnimated(true, completion: nil)
         
-        if let didSelectedAssets = self.didSelectedAssets {
-            didSelectedAssets(assets: self.selectedAssets)
+        if let delegate = self.delegate {
+            delegate.imagePickerController(self, didCompleteWithAssets: self.selectedAssets)
         }
     }
     
