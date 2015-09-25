@@ -109,8 +109,8 @@ public struct DKImagePickerControllerSourceType : OptionSetType {
 // MARK: - Public DKImagePickerController
 
 public protocol DKImagePickerControllerDelegate {
-    func imagePickerController(controller : DKImagePickerController, didCompleteWithAssets: [DKAsset])
-    func imagePickerControllerDidCancel(controller : DKImagePickerController)
+    func dk_imagePickerController(controller : DKImagePickerController, didCompleteWithAssets: [DKAsset])
+    func dk_imagePickerControllerDidCancel(controller : DKImagePickerController)
 }
 
 /**
