@@ -198,7 +198,7 @@ public class DKImagePickerController: UINavigationController {
         self.dismissViewControllerAnimated(true, completion: nil)
         
         if let delegate = self.pickerDelegate {
-            delegate.imagePickerControllerDidCancel(self)
+            delegate.dk_imagePickerControllerDidCancel(self)
         }
     }
     
@@ -206,7 +206,7 @@ public class DKImagePickerController: UINavigationController {
         self.dismissViewControllerAnimated(true, completion: nil)
         
         if let delegate = self.pickerDelegate {
-            delegate.imagePickerController(self, didCompleteWithAssets: self.selectedAssets)
+            delegate.dk_imagePickerController(self, didCompleteWithAssets: self.selectedAssets)
         }
     }
     
